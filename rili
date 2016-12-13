@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		#box>div{
+			width: 50px;
+			height: 50px;;
+			float: left;
+			border: 1px solid black;
+			box-sizing: border-box;
+			line-height: 50px;
+			text-align: center;
+		}
+		#box{
+			width: 350px;
+			height: 350px;
+		}
+		input{	
+			width: 50px;
+			height: 20px;
+		
+		}
+		#dat{
+			width: 350px;
+			height: 20px;
+		}
+		.inp{
+			float: left;
+			width: 150px;
+			height: 20px;
+			text-align: center;
+		}
+		
+		#search{
+			width:350px;
+			height: 30px;
+			
+		}
+	</style>
+	</head>
+	<body>
+	<div id="search">
+		
+	
+		<div class="inp">
+			<button id="btn1"><</button>
+			<input type="text" id="years">年
+			<button id="btn2">></button>
+		</div>
+		<div class="inp">
+			<button id="btn3"><</button>
+			<input type="text" id="months">月
+			<button id="btn4">></button>
+		</div>
+		
+		<button id="btn">查看</button>
+	</div>	
+		<div id="box"></div>
+		
+		
+		<script type="text/javascript">
+			var date=new Date();
+			var timeE=date.getDay();
+			var timeD=date.getDate();
+			var timeM=date.getMonth();
+			var timeM1=date.getMonth();
+			var timeY=date.getFullYear();
+			var timeY1=date.getFullYear();
+			var div=document.getElementById("box");
+			var str=""
+			
+			var years=document.getElementById("years")
+			var months=document.getElementById("months")
+			var btn=document.getElementById("btn")
+			var monthdays,trline;
+			years.value=timeY
+			months.value=timeM+1
+			btn.addEventListener("click",change)
+			function change(){
+				var changeyears=years.value;
+				var changemonths=months.value-1;
+				if(changemonths>11||changeyears==""||changemonths<0){
+					alert("输入格式错误")
+					
+				}else{
+				timeM=changemonths;
+				timeY=changeyears;
+				str=""
+				run(timeY)
+				table.forFun();	
+				}				
+			}
+			var btn1=document.getElementById("btn1")
+			var btn2=document.getElementById("btn2")
+			var btn3=document.getElementById("btn3")
+			var btn4=document.getElementById("btn4")
+			
+			btn1.addEventListener("click",change1)
+			function change1(){
+				years.value=timeY-1
+				timeY=timeY-1;
+				timeM=timeM;
+				str=""
+				run(timeY)
+				table.forFun();	
+				}	
+				
+			btn2.addEventListener("click",change2)
+			function change2(){
+				years.value=timeY+1
+				timeY=timeY+1;
+				timeM=timeM;
+				str=""
+				run(timeY)
+				table.forFun();	
+				}	
+			
+			btn3.addEventListener("click",change3)
+			function change3(){
+				
+				if(timeM>=1){
+				months.value=timeM
+				timeY=timeY;
+				timeM=timeM-1;
+				str=""
+				run(timeY)
+				table.forFun();
+				}else {
+				timeM=12;
+				months.value=timeM
+				years.value=timeY-1
+				timeY=timeY-1;
+				timeM=timeM-1;
+				str=""
+				run(timeY)
+				table.forFun();
+				}
+					
+				}
+			btn4.addEventListener("click",change4)
+			function change4(){
+				
+				if(timeM<11){
+				months.value=timeM+2
+				timeY=timeY;
+				timeM=timeM+1;
+				str=""
+				run(timeY)
+				table.forFun();
+				}else {
+				timeM=-1;
+				months.value=timeM+2
+				years.value=timeY+1
+				timeY=timeY+1;
+				timeM=timeM+1;
+				str=""
+				run(timeY)
+				table.forFun();
+				}
+					
+				}
+			
+			
+			
+			
+			
+			function run(year){
+				if((year%4==0&&year%100!=0)||(year%100==0&&year%400==0)){
+					return 29
+				}else{
+					return 28
+				}					
+			}
+		
+			function Fun(){
+			this.forFun=function (){
+				var monthFirstD=new Date(timeY,timeM,1);
+				var monthFirstE=monthFirstD.getDay();
+				
+				monthdays=[31,run(timeY),31,30,31,30,31,31,30,31,30,31]
+				trline=Math.ceil((monthFirstE+monthdays[timeM])/7)
+				
+				str+=("<div>"+"日"+"</div>")
+				str+=("<div>"+"一"+"</div>")
+				str+=("<div>"+"二"+"</div>")
+				str+=("<div>"+"三"+"</div>")
+				str+=("<div>"+"四"+"</div>")
+				str+=("<div>"+"五"+"</div>")
+				str+=("<div>"+"六"+"</div>")
+				for (var i=0;i<trline;i++) {
+				for (var j=0;j<7;j++) {
+					divs=i*7+j;
+					date_day=divs-monthFirstE+1;
+					if(date_day<=0&&timeM>0){
+						date_day=monthdays[timeM-1]+date_day
+					}else if(date_day<=0&&timeM==0){
+						date_day=monthdays[11]+date_day
+					}else if(date_day>monthdays[timeM]){
+						date_day=date_day-monthdays[timeM]
+					}
+					if(date_day==timeD&&timeY==timeY1&&timeM==timeM1){str+=("<div style='background:red;'>"+timeD+"</div>")}
+					else{str+=("<div>"+date_day+"</div>")}
+				}
+			}
+			div.innerHTML=str;	
+			}
+			
+			
+		
+			
+			}
+			
+			var table=new Fun();
+			table.forFun();
+			
+		</script>
+	</body>
+</html>
