@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>事件流</h1>
+<h3>冒泡流</h3>
+
+			
+<pre> 冒泡型事件：事件按照从最特定的事件目标到最不特定的事件目标(document对象)的顺序触发。
+
+  IE 5.5: div -> body -> document
+
+  IE 6.0: div -> body -> html -> document
+
+  Mozilla 1.0: div -> body -> html -> document -> window
+</pre>
+
+		
+<h3>捕获流</h3>
+
+<pre>			
+    捕获型事件(event capturing)：事件从最不精确的对象(document 对象)开始触发，然后到最精确(也可以在窗口级别捕获事件，不过必须由开发人员特别指定)。
+    </pre>
+<h3>Event 对象</h3>
+<p>Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。</p>
+<pre>
+	常用方法有:
+
+			
+	
+	onclick 当用户点击某个对象时调用的事件句柄。 
+	ondblclick 当用户双击某个对象时调用的事件句柄。 
+	onfocus 元素获得焦点。 
+	onkeydown 某个键盘按键被按下。 
+	onkeypress 某个键盘按键被按下并松开。 
+	onkeyup 某个键盘按键被松开。 
+	onload 一张页面或一幅图像完成加载。 
+	onmousedown 鼠标按钮被按下。 
+	onmousemove 鼠标被移动。 
+	onmouseout 鼠标从某元素移开。 
+	onmouseover 鼠标移到某元素之上。 
+	onmouseup 鼠标按键被松开。 
+	onreset 重置按钮被点击。 
+	onselect 文本被选中。 
+	onsubmit 确认按钮被点击。 
+	onunload 用户退出页面。 
+	button 返回当事件被触发时，哪个鼠标按钮被点击。 
+	clientX 返回当事件被触发时，鼠标指针的水平坐标。 
+	clientY 返回当事件被触发时，鼠标指针的垂直坐标。 
+	screenX 返回当某个事件被触发时，鼠标指针的水平坐标。 
+	screenY 返回当某个事件被触发时，鼠标指针的垂直坐标。 
+</pre>
+
+
+</body>
+</html>
