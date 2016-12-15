@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.14 画布功能总结</h1>
+<h3>fillStyle</h3>
+
+<pre>用于填充颜色的设置:
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.fillStyle = "#34A9EF";
+ctx.fillRect(0, 0, 300, 150);</pre>
+
+<h3>rect()</h3>
+<pre>创造矩形:
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.rect(20,20,150,100);
+ctx.stroke();
+</pre>
+
+<h3>arc()</h3>
+<pre>创造半圆:
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	ctx.fillStyle = "red";
+	ctx.beginPath();
+	ctx.arc(120, 2, 70, 0, Math.PI)
+	ctx.closePath()
+	ctx.fill()
+
+	创造整圆:
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(120, 2, 60, 0,2*Math.PI)
+	ctx.closePath()
+	ctx.fill()
+</pre>
+
+<h3>moveTo();lineTo()</h3>
+<pre>创造直线:
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo(300,150);
+ctx.stroke();
+</pre>
+
+<h3>beginPath();bezierCurveTo();closePath()</h3>
+<pre>起始一条路径，或重置当前路径;
+	 创建三次方贝塞尔曲线;
+	 创建从当前点回到起始点的路径;
+
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	ctx.fillStyle = "#FFFFD9";
+	ctx.beginPath();
+	ctx.moveTo(550, 500);
+	ctx.bezierCurveTo(500, 460, 470, 530, 530, 530);
+	ctx.closePath()
+	ctx.stroke();
+	ctx.fill()
+
+</pre>
+<h3>rotate()</h3>
+<pre>旋转当前绘图:
+将矩形旋转 80 度：
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.rotate(80*Math.PI/180);
+ctx.fillRect(50,20,100,50);
+</pre>
+
+<h3>translate()</h3>
+<pre>重新映射画布上的 (0,0) 位置:
+在位置 (10,10) 处绘制一个矩形，将新的 (0,0) 位置设置为 (70,70)。再次绘制新的矩形
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.fillRect(10,10,100,50);
+ctx.translate(70,70);
+ctx.fillRect(0,0,100,50);
+
+</pre>
+<h3>drawImage()</h3>
+<pre>向画布上绘制图像、画布或视频
+向画布上面绘制图片：
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+var img=document.getElementById("tulip");
+ctx.drawImage(img,10,10);
+
+参数设置:
+img 	规定要使用的图像、画布或视频。 
+sx 		可选。开始剪切的 x 坐标位置。 
+sy 		可选。开始剪切的 y 坐标位置。 
+swidth 	可选。被剪切图像的宽度。 
+sheight 可选。被剪切图像的高度。 
+x 		在画布上放置图像的 x 坐标位置。 
+y 		在画布上放置图像的 y 坐标位置。 
+width 	可选。要使用的图像的宽度。（伸展或缩小图像） 
+height 	可选。要使用的图像的高度。（伸展或缩小图像）
+
+在画布上定位图像，并规定图像的宽度和高度：
+context.drawImage(img,x,y,width,height);
+
+剪切图像，并在画布上定位被剪切的部分：
+context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+</pre>
+
+
+</body>
+</html>
