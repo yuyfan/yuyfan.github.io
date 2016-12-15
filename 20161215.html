@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.15 复习总结XML.SVG.画布猫.requestAnimationFrame </h1>
+<h2>XML</h2>
+<h3>XML 的用途</h3>
+<pre>XML 把数据从 HTML 分离
+如果你需要在 HTML 文档中显示动态数据，那么每当数据改变时将花费大量的时间来编辑 HTML。
+
+通过 XML，数据能够存储在独立的 XML 文件中。这样你就可以专注于使用 HTML 进行布局和显示，并确保修改底层数据不再需要对 HTML 进行任何的改变。
+
+通过使用几行 JavaScript，你就可以读取一个外部 XML 文件，然后更新 HTML 中的数据内容。
+</pre>
+<h3>XML 命名规则</h3>
+<pre>
+XML 元素必须遵循以下命名规则：
+
+名称可以含字母、数字以及其他的字符 
+名称不能以数字或者标点符号开始 
+名称不能以字符 “xml”（或者 XML、Xml）开始 
+名称不能包含空格 </pre>
+<h3>XML元素</h3>
+<pre>
+XML 元素指的是从（且包括）开始标签直到（且包括）结束标签的部分。
+元素可包含其他元素、文本或者两者的混合物。元素也可以拥有属性。
+</pre>
+<h3>XML实例</h3>
+<pre>  
+<span><</span>?xml version="1.0" encoding="ISO-8859-1" ?> 
+- <!--   Copyright w3school.com.cn 
+  --> 
+- <span><</span>note>
+  <span><</span>to>George<span><</span>/to> 
+  <span><</span>from>John<span><</span>/from> 
+  <span><</span>heading>Reminder<span><</span>/heading> 
+  <span><</span>body>Don't forget the meeting!<span><</span>/body> 
+  <span><</span>/note>
+ </pre>
+<h2>SVG</h2>
+<h3>SVG元素</h3>
+<pre>
+circle 定义圆 
+animateTransform 对元素进行动态的属性转换 
+linearGradient 定义线性渐变。 
+line 定义线条。 
+</pre>
+<h3>SVG实例</h3>
+<pre>
+	小猫头:
+	<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="100%" height="100%" version="1.1">
+
+<ellipse  cx="100" cy="50" rx="40" ry="30" stroke="black" stroke-width="2" fill="red"/>
+<polyline points="80,23, 60,10,62,40"style="fill:red;stroke:black;stroke-width:2"/>
+<polyline points="120,23, 140,10,138,40"style="fill:red;stroke:black;stroke-width:2"/>
+</svg>
+
+
+<span><</span>?xml version="1.0" standalone="no"?>
+
+<span><</span>!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<span><</span>svg width="100%" height="100%" version="1.1">
+
+<span><</span>ellipse  cx="100" cy="50" rx="40" ry="30" stroke="black" stroke-width="2" fill="red"/>
+<span><</span>polyline points="80,23, 60,10,62,40"style="fill:red;stroke:black;stroke-width:2"/>
+<span><</span>polyline points="120,23, 140,10,138,40"style="fill:red;stroke:black;stroke-width:2"/>
+<span><</span>/svg>
+
+</pre>
+
+<h3>画布画猫</h3>
+<pre>
+1.创建画布
+2.运用2个三次方贝塞尔曲线画出猫头,染色
+3.在运用圆.直线画出猫头上的详细内容
+4.画出身体和尾巴.
+5.更具画头和身体时候留下的节点运用4个三次方贝塞尔曲线画出爱心
+6.取色染色
+</pre>
+
+<h3>requestAnimationFrame</h3>
+<pre>制作载入条实例:
+
+	
+		<div id="box" style="height: 10px;width: 1px;background: red;"></div>
+		<script type="text/javascript">
+			var box=document.getElementById("box");
+			var n=0
+			window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+			function loading(){
+				n++;
+				box.style.width=n+"px";
+				box.innerHTML=n+"%";
+				if(n<100){
+					requestAnimationFrame(loading)
+				}	
+			}
+			
+			requestAnimationFrame(loading);
+		</script>
+代码:
+	<span><</span>div id="box" style="height: 10px;width: 1px;background: red;"><span><</span>/div>
+		<span><</span>script type="text/javascript">
+			var box=document.getElementById("box");
+			var n=0
+			window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+			function loading(){
+				n++;
+				box.style.width=n+"px";
+				box.innerHTML=n+"%";
+				if(n<100){
+					requestAnimationFrame(loading)
+				}	
+			}
+			
+			requestAnimationFrame(loading);
+		<span><</span>/script>
+
+</pre>
+</body>
+</html>
