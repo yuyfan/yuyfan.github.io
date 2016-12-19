@@ -21,6 +21,60 @@ as()
 输出分别给NaN和2,因为函数内有var a=2的申明所以前面的a输出为NaN.
 </pre>
 <h3>关于this的指向</h3>
-<pre>没有return时仅有一个函数时,通常是指向window 要明确指向目标</pre>
+<pre>
+var num=1;
+function foo(){
+	return function(){
+		return this.num;
+	}
+}
+var f=foo()
+console.log(f());
+this指向windos 指向全局
+
+
+</pre>
+
+
+<pre>var num=1
+var obj={}
+obj.num=3
+obj.f=function (){
+	alert(this.num)
+}
+obj.f()
+alert("全局"+num)
+
+此时this指向对象
+</pre>
+
+<pre>
+此时this指向windows
+var num=1
+var obj={}
+obj.num=2
+obj.foo=function{
+	return function(){
+		return this.num
+	}
+}
+
+alert(obj.foo()())
+
+
+
+此时this指向obj
+var num=1
+var obj={}
+obj.num=2
+obj.foo=function{
+var that=this
+	return function(){
+		return that.num
+	}
+}
+
+alert(obj.foo()())
+</pre>
 </body>
 </html>
