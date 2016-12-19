@@ -53,7 +53,7 @@ alert("全局"+num)
 var num=1
 var obj={}
 obj.num=2
-obj.foo=function{
+obj.foo=function(){
 	return function(){
 		return this.num
 	}
@@ -67,7 +67,7 @@ alert(obj.foo()())
 var num=1
 var obj={}
 obj.num=2
-obj.foo=function{
+obj.foo=function(){
 var that=this
 	return function(){
 		return that.num
