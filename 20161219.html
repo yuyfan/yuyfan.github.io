@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.19 video总结</h1>
+<h3>video对象</h3>
+<pre>audioTracks 	返回表示可用音频轨道的 AudioTrackList 对象。 
+autoplay 			设置或返回是否在就绪（加载完成）后随即播放视频。 
+buffered 			返回表示视频已缓冲部分的 TimeRanges 对象。 
+controller 			返回表示视频当前媒体控制器的 MediaController 对象。 
+controls 			设置或返回视频是否应该显示控件（比如播放/暂停等）。 
+crossOrigin 		设置或返回视频的 CORS 设置。 
+currentSrc 			返回当前视频的 URL。 
+currentTime 		设置或返回视频中的当前播放位置（以秒计）。 
+defaultMuted 		设置或返回视频默认是否静音。 
+defaultPlaybackRate 设置或返回视频的默认播放速度。 
+duration 			返回视频的长度（以秒计）。 
+ended 				返回视频的播放是否已结束。 
+error 				返回表示视频错误状态的 MediaError 对象。 
+height 				设置或返回视频的 height 属性的值。 
+loop 				设置或返回视频是否应在结束时再次播放。 
+mediaGroup 			设置或返回视频所属媒介组合的名称。 
+muted 				设置或返回是否关闭声音。 
+networkState		返回视频的当前网络状态。 
+paused 				设置或返回视频是否暂停。 
+playbackRate 		设置或返回视频播放的速度。 
+played 				返回表示视频已播放部分的 TimeRanges 对象。 
+poster 				设置或返回视频的 poster 属性的值。 
+preload 			设置或返回视频的 preload 属性的值。 
+readyState 			返回视频当前的就绪状态。 
+seekable 			返回表示视频可寻址部分的 TimeRanges 对象。 
+seeking 			返回用户当前是否正在视频中进行查找。 
+src 				设置或返回视频的 src 属性的值。 
+startDate 			返回表示当前时间偏移的 Date 对象。 
+textTracks 			返回表示可用文本轨道的 TextTrackList 对象。 
+videoTracks 		返回表示可用视频轨道的 VideoTrackList 对象。 
+volume 				设置或返回视频的音量。 
+width 				设置或返回视频的 width 属性的值。 
+</pre>
+
+<h3>video实例</h3>
+<pre>
+<span><</span>!DOCTYPE html>
+<span><</span>html>
+	<span><</span>head>
+		<span><</span>meta charset="UTF-8">
+		<span><</span>title><span><</span>/title>
+		<span><</span>style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#loading{
+			width: 800px;
+			height: 20px;
+			
+			position: absolute;
+		}
+			#out{
+				float: right;
+				width: 600px;
+				height: 10px;;
+				background: #E5E5E5;
+				margin-top: 5px;
+				
+			}
+			#buffed{
+				width:0;
+				height: 10px;;
+				background:#34A9EF ;
+			}
+			#in{
+				width:0;
+				height: 10px;;
+				background:#999999;
+			}
+			#ct{
+				width:30px ;
+			}
+			#dt{
+				width:30px ;
+			}
+		<span><</span>/style>
+	<span><</span>/head>
+	<span><</span>body>
+		<span><</span>video src="files/婚礼现场.webm"  width="800" id="myVideo">
+您的浏览器不支持 video 标签。
+<span><</span>/video>
+<span><</span>div id="loading">
+	<span><</span>button id="playbtn">播放</button>
+<span><</span>input type="currentT" name="" id="ct" value="" />
+<span><</span>input type="duration" name="" id="dt" value="" />
+	<span><</span>div id="out">
+		<span><</span>div id="buffed">
+	<span><</span>div id="in">		
+	<span><</span>/div>
+<span><</span>/div>
+<span><</span>/div>
+</div>
+
+
+	<span><</span>script type="text/javascript">
+		var videos = document.getElementById("myVideo");
+		var playbtn=document.getElementById("playbtn")
+		var ct=document.getElementById("ct");
+		var dt=document.getElementById("dt");
+		var out=document.getElementById("out")
+		var inload=document.getElementById("in")
+		var buffed=document.getElementById("buffed")
+		
+		
+		playbtn.addEventListener("click",play)	
+		
+		function play () {
+			if (playbtn.innerHTML=="播放"){
+				videos.play();
+				playbtn.innerHTML="暂停"
+			}else{
+				videos.pause();
+				playbtn.innerHTML="播放"
+			}
+			st=setInterval(function(){
+			ct.value=Math.floor(videos.currentTime);
+			dt.value=Math.floor(videos.duration);
+			inload.style.width=videos.currentTime/videos.duration*600+"px"
+			var tbuffed=videos.buffered
+			var tdbuffed=videos.buffered.end(tbuffed.length-1)
+			buffed.style.width=tdbuffed/videos.duration*600+"px"
+		
+			},300	)
+			
+			
+			inload,addEventListener("mousedown",down)
+			function down(e){
+				e.preventDefault();
+				downtime=e.clientX
+				
+			}
+			inload,addEventListener("mouseup",up)
+			function up(e){
+				e.preventDefault();
+				uptime=e.clientX
+				durat=uptime-downtime
+				
+				inload.style.width=videos.currentTime/videos.duration*out.offsetWidth+Number(durat)+"px"
+				videos.currentTime = videos.currentTime+durat/out.offsetWidth * videos.duration;
+				
+			}
+			inload,addEventListener("click",clicka)
+			function clicka(e){
+				e.preventDefault();
+				clicktime=e.clientX
+				clickdrue=clicktime-200
+				videos.currentTime=clickdrue/out.offsetWidth* videos.duration
+				inload.style.width=clickdrue/videos.duration*out.offsetWidth+"px"
+				
+			}
+		}
+		
+		
+	<span><</span>/script>
+	
+
+	<span><</span>/body>
+<span><</span>/html>
+</pre>
+</body>
+</html>
