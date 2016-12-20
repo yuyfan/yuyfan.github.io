@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2016.12.20 音频.跑马灯总结复习</title>
+	<style type="text/css">
+			#bigbox {
+				width: 200px;
+				height: 20px;
+				overflow:hidden;
+			}
+			
+			#inbox {
+				width: 400px;
+				height: 20px;
+				background: red;
+				
+			}
+			
+			#txt1 {
+				width: 200px;
+				height: 20px;
+				float: left;
+			}
+			
+			#txt2 {
+				width: 200px;
+				height: 20px;
+				float: left;
+			}
+			
+			
+		</style>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.20 音频总结复习</h1>
+<h3>进度条的拖动过程的效果</h3>
+<pre>
+	out.addEventListener("mousemove",move1)
+		function move1(e){
+			if(b){
+			e.preventDefault();
+			movetime=e.clientX;
+			inload.style.width=movetime-200+"px"
+		}
+		}
+</pre>
+<h3>下一曲动作</h3>
+<pre>
+	先设定按钮 
+	再设置按钮的监听
+	再一曲的时候要将currentTime和缓冲进行清零
+	js代码:
+	nextbtn.addEventListener("click",nextbtna)
+			var n=0;
+			function nextbtna(){
+				n++;
+				if(n<span><</span>arr.length){
+				videos.currentTime=0;
+				videos.src=arr[n].src;
+				tbuffed=0;
+				videos.play();
+			
+			}else{n=0;
+				videos.currentTime=0;
+				videos.src=arr[n].src;
+				tbuffed=0;
+				videos.play();
+				
+			}
+			}
+</pre>
+<h3>音量设置</h3>
+<pre>
+与设置进度条原理接近
+代码如下:
+			volume_out.addEventListener("click",volumec)
+			function volumec(e){
+				e.preventDefault();
+				volumemove=e.clientY
+				volumechange=volumemove-videos.offsetHeight-5;
+				if(volumechange<span><</span>=40&&volumechange>=0){
+				volume_in.style.height=volumechange+"px";
+				videos.volume=Number(volumechange/volume_out.offsetHeight)
+			}}
+	
+</pre>
+
+<h3>跑马灯</h3>
+<pre>
+	了解overflow的使用方法
+	运用scrollLeft进行实行跑马灯
+	var bigbox = document.getElementById("bigbox")
+			var txt2 = document.getElementById("txt2")
+			var txt1 = document.getElementById("txt1")
+
+			function move1() {
+				bigbox.scrollLeft++;
+				}
+			}
+			setInterval(move1,10)
+
+	以上是进行单次跑马灯效果的代码.
+	要进行循环需要在move1函数中进行条件判断,修改后代码如下:
+	function move1() {
+				if(bigbox.scrollLeft==txt2.offsetWidth){
+				bigbox.scrollLeft=0	
+				}else{
+					bigbox.scrollLeft++;
+				}
+			}
+
+
+实际效果:
+</pre>
+<div id="bigbox">
+			<div id="inbox">
+				<div id="txt1">1234567</div>
+				<div id="txt2">1234567</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			var bigbox = document.getElementById("bigbox")
+			var txt2 = document.getElementById("txt2")
+			var txt1 = document.getElementById("txt1")
+
+			function move1() {
+				if(bigbox.scrollLeft==txt2.offsetWidth){
+				bigbox.scrollLeft=0	
+				}else{
+					bigbox.scrollLeft++;
+				}
+			}
+			setInterval(move1, 10)
+			</script>
+</body>
+</html>
