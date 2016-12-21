@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2016.12.21 制作消除砖块游戏总结</title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.21 制作消除砖块游戏总结</h1>
+<h3>素材准备</h3>
+<pre>运用PS.网上搜索等方法准备好需要的素材</pre>
+<h3>画布.挡板.球的创造</h3>
+<pre>运用封装的方法,让繁琐重复的步骤减少
+代码:
+window.onload=init;
+window.onkeydown=keydown;
+var canva,cH,cW,ctx,boradset,ballX,ballY,vx,vy,boradW,boradH,brickW,brickH;
+var bricks=[];
+cH=800;
+boradW=150;
+boradH=20;
+cW=1000;
+ballX=500;
+ballY=400;
+vx=4;
+vy=8;
+brickW=150;
+brickH=50;
+以上为准备需要到的代码之后都会用得上 现在这里设定好.
+
+function init () {
+	trace("游戏初始化")
+	canva=document.getElementById("canva")
+	ctx=canva.getContext("2d")
+	bg=addimg("assets/bg.png")
+	ball=addimg("assets/ball.png")
+	board=addimg("assets/board.png")
+	var updatetime=setInterval(updatecanvas,1000/60)
+
+}
+function updatecanvas(){
+	ctx.clearRect(0,0,cW,cH)
+	ctx.drawImage(bg,0,0);
+	ctx.drawImage(ball,ballX,ballY)
+	ctx.drawImage(board,boradset,700)
+}
+function addimg (srcc) {
+	var img=new Image()
+	img.src=srcc
+	return img
+}
+
+</pre>
+<h3>球与挡板的运动</h3>
+<pre>
+	因为球的运动在遇到墙或者挡板之后会反向运动,所以需要设定一个速度来运行计算.
+	代码:
+function ballmove(){
+	ballX+=vx;
+	ballY+=vy;
+	if(ballX>=cW-ball.width){
+		vx*=-1;
+		
+	}else if(ballX<=0){
+		vx*=-1
+		
+	}else if(ballY<=0){
+		vy*=-1;
+	
+	}else if(ballY+ball.height>=700&&ballX+ball.width/2>=boradset&&ballY+ball.height<=700+boradH&&ballX+ball.width/2<=boradset+boradW){
+		vy*=-1.;
+	}
+	
+}
+window.addEventListener("mousemove",boardmove)
+function boardmove (e) {	
+	e.preventDefault();	
+	boradset=e.clientX-boradW/2;
+}
+function keydown (e) {
+	if(e.keyCode==37){
+		boradset -= 50;
+	}
+	if(e.keyCode==39){
+		boradset += 50;
+	}
+	if(e.keyCode==65){
+		boradset -= 50;
+	}
+	if(e.keyCode==68){
+		boradset += 50;
+	}
+}
+
+</pre>
+<h3>挡板阻挡</h3>
+<pre>关键是对球的位置和挡板长度的判断
+代码:
+if(ballY+ball.height>=700&&ballX+ball.width/2>=boradset&&ballY+ball.height<=700+boradH&&ballX+ball.width/2<=boradset+boradW){
+		vy*=-1.;
+	}
+</pre>
+<h3>砖块的形成</h3>
+<pre>
+	运用带了2个for循环和数组的知识,搞清楚数组内的数据和调用
+	代码:
+	var bricks=[];
+	function creatBrick(){
+	for (var i=0 ;i<span><</span>6;i++) {
+		for (var j=0 ;j<span><</span>4;j++) {
+			str ="assets/"+parseInt(Math.random()*10)%6+".png"
+			var item=addimg(str)
+			var bricksx=i * (brickW+10)+20
+			var bricksy=j * (brickH+5)+30
+			var obj={item:item,x:bricksx,y:bricksy}
+			bricks.push(obj)
+		}
+	}
+}
+function drawbrick(){
+ 	for (var i=0 ;i<span><</span>bricks.length;i++) {
+ 		var item=bricks[i]
+ 		ctx.drawImage(item.item,item.x,item.y)
+ 	}
+}
+</pre>
+<h3>砖块碰撞与消除的形成</h3>
+<pre>
+	碰撞的远离和挡板类似,不过需要for循环提取出砖块格子的位置.消除使用splice消除该位置的对应的砖块.
+	代码:
+	function ballBricksHit(){
+	var l = bricks.length;
+	for(var i = 0;i<span><</span>l;i++){
+		var item = bricks[i].item;
+		if(ballY<span><</span>bricks[i].y+item.height&&ballX+ball.width/2>bricks[i].x&&ballY>bricks[i].y&&ballX+ball.width/2<=bricks[i].x+item.width){
+			bricks.splice(i,1);
+			vy *= -1;
+			item = null;
+		}
+	}
+}
+
+整体合成的代码效果再首页实例里面
+</pre>
+</body>
+</html>
