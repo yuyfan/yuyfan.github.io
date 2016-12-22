@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#tab{
+				border: 1px solid black;
+			}
+			#tab td{
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>2016.12.22 AJAX.JSON复习总结</h1>
+		<h3>AJAX复习总结</h3>
+		<pre>AJAX = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）。
+AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+AJAX 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。
+AJAX 是一种用于创建快速动态网页的技术。
+通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新
+AJAX的基本实例代码:
+基本格式
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "statues.txt");   GET/POST需要大写  statues.txt为所取数据的链接地址
+xhr.send();	
+xhr.onreadystatechange = function(msg) {
+				if(xhr.readyState == 4) {
+					if(xhr.status == 200) {
+						document.getElementById("div").innerHTML=xhr.responseText
+					}
+				}
+			}
+或者
+xhr.onload=function  () {
+	document.getElementById("div").innerHTML=xhr.responseText
+	}
+	
+	
+	
+</pre>
+
+<h3>JSON复习总结</h3>
+<pre>
+JSON：JavaScript 对象表示法（JavaScript Object Notation）。
+
+JSON 是存储和交换文本信息的语法。类似 XML。
+
+JSON 比 XML 更小、更快，更易解析
+
+JSON.parse(xhr.responseText)负责将JSON转化为JS的内容
+</pre>
+
+<h3>AJAX与JSON结合</h3>
+<pre>
+形成表格代码:
+AJAX部分
+	<span><</span>head>
+		<span><</span>meta charset="UTF-8">
+		<span><</span>title></title>
+		<span><</span>style type="text/css">
+			#tab{
+				border: 1px solid black;
+			}
+			#tab td{
+				border: 1px solid black;
+			}
+		<span><</span>/style>
+	<span><</span>/head>
+
+	<span><</span>body>
+		<span><</span>div id="myDiv">
+			
+			
+		<span><</span>/div>
+		
+		<span><</span>script type="text/javascript">
+			var div=document.getElementById("myDiv")
+			var tab=document.createElement("table")              生成表格
+			div.appendChild(tab)
+			tab.id="tab"
+			var xhr = new XMLHttpRequest();
+			var line;
+			xhr.open("GET", "statues.json");
+			xhr.send();
+			xhr.onreadystatechange = function(msg) {
+				if(xhr.readyState == 4) {
+					if(xhr.status == 200) {
+						var o = JSON.parse(xhr.responseText);
+						for(var i = 0; i <span><</span> o.length; i++) {
+							var oo = o[i];
+							line=document.getElementById('tab').insertRow(i)
+							tableinsect ()
+						}
+						
+						function tableinsect () {           这边是为表格插入行与行内内容的函数方法
+							var name=line.insertCell(0)
+							var sex=line.insertCell(1)
+							var age=line.insertCell(2)
+							var university=line.insertCell(3)
+							var major=line.insertCell(4)
+							var college=line.insertCell(5)
+							var phoneNumber=line.insertCell(6)
+							name.innerHTML=oo.name
+							sex.innerHTML=oo.sex
+							age.innerHTML=oo.age
+							university.innerHTML=oo.university
+							major.innerHTML=oo.major
+							college.innerHTML=oo.college
+							phoneNumber.innerHTML=oo.phoneNumber
+						}
+					}
+				}
+			}
+
+				/*xhr.onload=function  () {
+							document.getElementById("myDiv").innerHTML=xhr.responseText
+						}*/
+		<span><</span>/script>
+	<span><</span>/body>
+
+
+josn部分
+[
+				{
+					"name": "张三",
+					"sex": "男",
+					"age": "20",
+					"phoneNumber": "110120130140",
+					"university": "浙江大学",
+					"major": "历史专业",
+					"college": "淘宝学院",
+					"入学年份": "1998"
+				},
+				{
+					"name": "李四",
+					"sex": "女",
+					"age": "10",
+					"phoneNumber": "190120030140",
+					"university": "杭州大学",
+					"major": "软件工程",
+					"college": "阿里学院",
+					"入学年份": "1989"
+				},
+				{
+					"name": "贾轩",
+					"sex": "男",
+					"age": "29",
+					"phoneNumber": "1234320140",
+					"university": "温州大学",
+					"major": "电子信息工程",
+					"college": "职业学院",
+					"入学年份": "1967"
+				},
+				{
+					"name": "赵天成",
+					"sex": "男",
+					"age": "24",
+					"phoneNumber": "123424140",
+					"university": "浙江大学",
+					"major": "通信工程",
+					"college": "电子通信学院",
+					"入学年份": "2013"
+				},
+				{
+					"name": "唐开强",
+					"sex": "男",
+					"age": "36",
+					"phoneNumber": "113242340140",
+					"university": "中国大学",
+					"major": "船舶工程",
+					"college": "航母学院",
+					"入学年份": "1999"
+				}
+
+			]
+</pre>
+<h4>效果</h4>
+<div id="myDiv">
+			
+			
+		</div>
+	<script type="text/javascript">
+			var div=document.getElementById("myDiv")
+			var tab=document.createElement("table")
+			div.appendChild(tab)
+			tab.id="tab"
+			var xhr = new XMLHttpRequest();
+			var line;
+			xhr.open("GET", "statues.json");
+			xhr.send();
+			xhr.onreadystatechange = function(msg) {
+				if(xhr.readyState == 4) {
+					if(xhr.status == 200) {
+						var o = JSON.parse(xhr.responseText);
+						for(var i = 0; i < o.length; i++) {
+							var oo = o[i];
+							line=document.getElementById('tab').insertRow(i)
+							tableinsect ()
+						}
+						
+						function tableinsect () {
+							var name=line.insertCell(0)
+							var sex=line.insertCell(1)
+							var age=line.insertCell(2)
+							var university=line.insertCell(3)
+							var major=line.insertCell(4)
+							var college=line.insertCell(5)
+							var phoneNumber=line.insertCell(6)
+							name.innerHTML=oo.name
+							sex.innerHTML=oo.sex
+							age.innerHTML=oo.age
+							university.innerHTML=oo.university
+							major.innerHTML=oo.major
+							college.innerHTML=oo.college
+							phoneNumber.innerHTML=oo.phoneNumber
+						}
+					}
+				}
+			}
+
+				/*xhr.onload=function  () {
+							document.getElementById("myDiv").innerHTML=xhr.responseText
+						}*/
+		</script>
+	</body>
+</html>
