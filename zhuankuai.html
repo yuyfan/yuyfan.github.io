@@ -1,3 +1,4 @@
+<pre>
 window.onload=init;
 window.onkeydown=keydown;
 var canva,cH,cW,ctx,boradset,ballX,ballY,vx,vy,boradW,boradH,brickW,brickH;
@@ -38,9 +39,9 @@ function updatecanvas(){
 
 function creatBrick(){
 	
-	
-	for (var i=0 ;i<6;i++) {
-		for (var j=0 ;j<4;j++) {
+		 		
+	for (var i=0 ;i<span><</span> 6;i++) {
+		for (var j=0 ;j<span><</span>4;j++) {
 			str ="assets/"+parseInt(Math.random()*10)%6+".png"
 			var item=addimg(str)
 			var bricksx=i * (brickW+10)+20
@@ -57,20 +58,20 @@ function drawbrick(){
  	}
 }
 //碰撞检测
-/*function testObjectHit(x1,y1,w,h,x2,y2){
-	if(x2>x1&& y2 > y1 && x2 < x1 + w && y2 < y1 + h){
+function testObjectHit(x1,y1,w,h,x2,y2){
+	if(x2>x1&& y2 > y1 && x2 <span><</span> x1 + w && y2 <span><</span> y1 + h){
 		return true;
 	}else{
 		return false;
 	}
-}*/
+}
 
 function ballBricksHit(){
 	var l = bricks.length;
-	for(var i = 0;i<l;i++){
+	for(var i = 0;i<span><</span>l;i++){
 		var item = bricks[i].item;
 		/*var b = testObjectHit(bricks[i].x,bricks[i].y,item.width,item.height,ballX,ballY);*/
-		if(ballY<bricks[i].y+item.height&&ballX+ball.width/2>bricks[i].x&&ballY>bricks[i].y&&ballX+ball.width/2<=bricks[i].x+item.width){
+		if(ballY<span><</span>bricks[i].y+item.height&&ballX+ball.width/2>bricks[i].x&&ballY>bricks[i].y&&ballX+ball.width/2<span><</span>=bricks[i].x+item.width){
 			bricks.splice(i,1);
 			vy *= -1;
 			item = null;
@@ -84,14 +85,14 @@ function ballmove(){
 	if(ballX>=cW-ball.width){
 		vx*=-1;
 		
-	}else if(ballX<=0){
+	}else if(ballX<span><</span>=0){
 		vx*=-1
 		
-	}else if(ballY<=0){
+	}else if(ballY<span><</span>=0){
 		vy*=-1;
 	}else if(ballY>=cH){
 		vy*=-1;
-	}else if(ballY+ball.height>=700&&ballX+ball.width/2>=boradset&&ballY+ball.height<=700+boradH&&ballX+ball.width/2<=boradset+boradW){
+	}else if(ballY+ball.height>=700&&ballX+ball.width/2>=boradset&&ballY+ball.height<span><</span>=700+boradH&&ballX+ball.width/2<span><</span>=boradset+boradW){
 		vy*=-1.;
 	}
 	
@@ -129,3 +130,4 @@ function keydown (e) {
 		boradset += 50;
 	}
 }
+</pre>
