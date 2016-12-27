@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<h1>12.26 jquery复习总结1</h1>
+		<h3>jquery选择器</h3>
+		<h4>基本选择器</h4>
+		<pre>
+基本选择器又可以分为三种,分别为
+•	CSS选择器
+•	层级选择器
+•	表单域选择器
+CSS选择器
+ 标签选择器
+　　用于选择HTML页面已有的标签元素，也称元素选择器。
+　　格式： $("element");
+　　例： $("div")
+ ID选择器
+　　用于获取某个具有ID属性的元素。
+　　格式： $("id")
+　　例：　　$("#test").val();
+ 类选择器
+　　获取某个具有class属性的元素。
+　　格式：$("class")
+　　例： $(".t").css("border","2px solid blue");
+ 通用选择器
+　　通用选择器（*）匹配所有元素，多用于结合上下文来搜索。
+　　格式：$("*")
+　　例：$("*").css("color","red");
+ 群组选择器
+　　又称多元素选择器，用于选择所有指定的选择器组合的结果。
+　　格式：$("selector,selector2,......,selectorN")
+　　例： $("div,span,p.styleClass").css("border","2px solid blue");
+层级选择器
+ 子元素选择器
+　　用于在给定的父元素下查找其下面的所有子元素。
+　　格式：$("parent>child")
+　　例：$("form > input");
+　　　　匹配form表单中所有的子级input元素。
+ 后代选择器
+　　用于在给定的祖先元素下匹配所有的后代元素。
+　　格式：$("ancestor descendant")
+　　例：$("form input");
+　　　　查找form元素的后代元素中为input的标记。
+ 紧邻同辈选择器
+　　用于匹配所有紧接在某元素后的第一个元素。
+　　格式：$("prev+next")
+　　例：$("div+span");
+　　　　匹配所有跟在div后的span元素。
+ 相邻同辈选择器
+　　用于匹配某元素后面的所有同辈元素。
+　　格式：$("prev~slblings")
+　　例：$("input~p").css("color","red");
+表单域选择器
+表单域指网页中的input,textareaselect,button元素。jQuery 表单域选择器专门用于从文档中选择表单域。
+ :input选择器
+　　用于选择所有input,textareaselect,button元素。
+　　格式：$(":input")
+ :text选择器
+　　用于选择所有单行文本框(<input type="text"/>)。
+　　格式：$(":text")
+ :password选择器
+　　用于选择所有密码框(<input type="password"/>)。
+　　格式：$(":password")
+ :radio选择器
+　　用于选择所有单选按钮(<input type="radio"/>)。
+　　格式：$(":radio")
+ :chckbox选择器
+　　用于选择所有复选框(<input type="chckbox"/>)。
+　　格式：$(":chckbox")
+ :file选择器
+　　用于选择所有文件域(<input type="file"/>。
+　　格式：$(":file")
+ :image选择器
+　　用于选择所有图像域(<input type="image"/>)。
+　　格式：$(":image")
+ :hidden选择器
+　　用于选择所有不可见元素(<input type="hidden"/>)。
+　　格式：$(":hidden")
+ :button选择器
+　　用于选择所有按钮(<input type="button"/>和<button>•••</button>)。
+　　格式：$(":button")
+ :submit选择器
+　　用于选择所有提交按钮(<input type="submit"/>和<button>•••</button>)。
+　　格式：$(":submit")
+ :reset选择器
+　　用于选择所有重置按钮(<input type="reset"/>)
+　　格式：$(":reset")
+		</pre>
+<h3>jquery事件</h3>
+<h4>事件分类</h4>
+<pre>与浏览器相关
+ready
+scroll
+resize
+
+鼠标相关
+click
+dblclick
+hover
+blur
+focus
+focusin
+focusout
+mousedown,mousemove,mouseout,mouseover,mouseup
+
+与键盘相关
+keydown,keypress,keyup
+</pre>
+<h4>事件处理</h4>
+<pre>绑定事件
+on()方法 		为所有当前的 − 以及之后的 − 匹配元素将一个处理程序捆绑到一个事件上(如点击)。 也可以捆绑自定义事件。
+bind()方法		为每个匹配的元素将一个处理程序捆绑到一个或多个事件上(如点击)。也可以捆绑自定义事件
+one()方法		为每个匹配的元素将一个处理程序绑定到一个或多个要被执行的事件上。
+hover(over, out)方法 	模拟徘徊，例如将鼠标移动到一个对象上，并将鼠标从该对象上移开
+trigger()方法	触发被选元素的指定事件类型
+live()方法-注意版本支持	该方法为整个页面生命周期内的某一类对象绑定一个事件处理程序
+
+移除事件
+unbind()方法 	该方法实现绑定相反的操作，它从每个匹配的元素中删除绑定的事件。
+off()方法  		该方法实现的是 live 的对立面，它删除了捆绑的 live 事件
+die([type][,fn])方法 	die方法与live方法对应，用于解除用live注册的自定义事件 ， type用于指定要删除的事件类型，fn用于指定要删除的事件处理程序的名称。
+
+
+
+</pre>
+
+
+
+
+
+	</body>
+
+</html>
