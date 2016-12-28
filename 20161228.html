@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.28 jqurey复习总结3</h1>
+<h3>查询功能</h3>
+<pre>
+var $name=$("#username").val()
+var $mobile=$("#phone").val()
+var $college=$("#unversity").val()
+通过这个获取输入框内的内容,
+
+if($name!=0){
+	_data.name=$name;
+}
+判断输入款内的内容是否为空,不为空则将内容带入数据查询
+</pre>
+<h3>双击弹框并且有内容 currentTarget</h3>
+<pre>
+$("tr").dblclick(function  (e) {
+	console.log(arr[e.currentTarget.id])
+	})
+currentTarget.id双击之后会返回对象的id属性,在之前创造时
+	str += "<span><</span>tr id="+i+" class='trc'>"
+提前赋予.
+就能获得数组内需要的元素
+</pre>
+</body>
+</html>
