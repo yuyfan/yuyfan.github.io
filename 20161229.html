@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2016.12.29 jqurey复习总结3</h1>
+<h3>AJAX提交</h3>
+<pre>
+	1.设置文本布局
+2.获取文本内容
+3.将文本的内容的信息放入data内,
+
+代码:
+var _data = {};
+
+			_data.name = $("#username").val();
+			_data.sex = $("#sex").val();
+			_data.birthday = $("#birthday").val() ;
+			_data.mobile = $("#phoneNum").val() ;
+			_data.political = $("#political").val() ;
+			_data.qq = $("#qq").val() ;
+			_data.college = $("#college").val() ;
+			_data.faculty = $("#faculty").val() ;
+			_data.major = $("#major").val() ;
+			_data.fatherName = $("#fausername").val() ;
+			_data.fatherMobile = $("#faphoneNum").val() ;
+			_data.matherName = $("#mousername").val() ;
+			_data.matherMobile = $("#mophoneNum").val() ;
+			_data.homeAddress = $("#homeAddress").val() ;
+			_data.source = source;
+			_data.majorMemo = $("#ability").val() ;
+			_data.selfMemo = $("#self").val();
+
+			$.ajax({
+				url: "http://www.hemijiaoyu.com/service/addApply",
+				type: "POST",
+				dataType: "JSON",
+				data: _data,
+				success: function(msg) {
+					console.log(msg)
+				},
+				error: function(error) {
+					console.log(error)
+				}
+			})
+
+			})	
+</pre>
+
+
+</body>
+</html>
