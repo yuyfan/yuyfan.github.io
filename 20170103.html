@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<h1>2017.01.03 jquery复习总结6</h1>
+<h3>二级跟随变化</h3>
+<pre>
+siblings()同级单位
+.eq()   获取第N个元素
+代码:
+	$(function  () {
+    		$(".tab li").mouseenter(function  () {
+    			$(this).addClass("active").siblings().removeClass("active")
+    			var st=$(this).index()
+    			$(".main").eq(st).addClass("selected").siblings().removeClass("selected")
+    		})
+    	})
+</pre>
+<h3>轮播</h3>
+<pre>代码:
+$(function  () {
+			var idx=1
+			$(".wrap ol li").mouseenter(function  () {
+				
+				idx += 1;
+				$(this).addClass("active").siblings().removeClass("active")
+				$(".wrap ul li").eq($(this).index()).css({
+					"left":650,
+					"z-index":idx
+				}).animate({
+					"left":0	
+				},300)
+			})
+		})
+
+注意 css({})中间加花括号,属性需要加""
+animate() 也一样
+</pre>
+<h3>手风琴模式</h3>
+代码: $(function () {
+            $(".wrap li").each(function (i,ele) {
+                $(this).css("background-image","url(" + (i + 1) +".jpg)");
+            }).mouseenter(function () {
+                $(this).stop().animate({
+                    "width":600
+                },300).siblings().stop().animate({
+                    "width":100
+                },300)
+            }).mouseleave(function () {
+                $(".wrap li").stop().animate({
+                    "width":200
+                },300)
+            });
+        })
+ 关键点:
+1.each (function (i,ele){}) i是索引,ele是元素
+2.在animate()前加入stop防止出错
+</body>
+</html>
