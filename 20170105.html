@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>2017.1.5 css3复习总结</h1>
+		<h3>CSS3 简介</h3>
+<pre>
+<h4>CSS3 模块</h4>
+CSS3 被划分为模块。
+其中最重要的 CSS3 模块包括：
+选择器 
+框模型 
+背景和边框 
+文本效果 
+2D/3D 转换 
+动画 
+多列布局 
+用户界面 
+</pre>
+<h3>CSS3 transform 属性</h3>
+<pre>
+属性:
+none 定义不进行转换。  
+matrix(n,n,n,n,n,n) 定义 2D 转换，使用六个值的矩阵。  
+matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n) 定义 3D 转换，使用 16 个值的 4x4 矩阵。  
+translate(x,y) 定义 2D 转换。 
+translate3d(x,y,z) 定义 3D 转换。  
+translateX(x) 定义转换，只是用 X 轴的值。 
+translateY(y) 定义转换，只是用 Y 轴的值。 
+translateZ(z) 定义 3D 转换，只是用 Z 轴的值。  
+scale(x,y) 定义 2D 缩放转换。 
+scale3d(x,y,z) 定义 3D 缩放转换。  
+scaleX(x) 通过设置 X 轴的值来定义缩放转换。  
+scaleY(y) 通过设置 Y 轴的值来定义缩放转换。  
+scaleZ(z) 通过设置 Z 轴的值来定义 3D 缩放转换。  
+rotate(angle) 定义 2D 旋转，在参数中规定角度。 
+rotate3d(x,y,z,angle) 定义 3D 旋转。  
+rotateX(angle) 定义沿着 X 轴的 3D 旋转。 
+rotateY(angle) 定义沿着 Y 轴的 3D 旋转。 
+rotateZ(angle) 定义沿着 Z 轴的 3D 旋转。 
+skew(x-angle,y-angle) 定义沿着 X 和 Y 轴的 2D 倾斜转换。 
+skewX(angle) 定义沿着 X 轴的 2D 倾斜转换。 
+skewY(angle) 定义沿着 Y 轴的 2D 倾斜转换。 
+perspective(n) 为 3D 转换元素定义透视视图。 
+
+注:除了perspective 都需要transform在前面
+
+旋转实例:
+div
+{
+transform:rotate(7deg);
+}
+
+</pre>
+<h3>CSS3 perspective 属性</h3>
+<pre>
+perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。
+当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。
+
+实例:
+div
+{
+perspective: 500;
+}
+
+</pre>
+<h3>CSS3 过渡</h3>
+<pre>
+通过 CSS3，我们可以在不使用 Flash 动画或 JavaScript 的情况下，当元素从一种样式变换为另一种样式时为元素添加效果。
+CSS3 过渡是元素从一种样式逐渐改变为另一种的效果。
+
+要实现这一点，必须规定两项内容：
+
+规定您希望把效果添加到哪个 CSS 属性上 
+规定效果的时长 
+
+属性:
+transition 属性是一个简写属性，用于设置四个过渡属性：
+实例:
+transition:all 2s linear ;
+
+</pre>
+<h3>keyframes</h3>
+<pre>@keyframes name{
+	
+}
+这个方法配合animation使用制作动画.
+实例:
+@keyframes box{
+		0%  	{transform: scale(1,1)}
+		10%	{transform: scale(1.4,0.6)}
+		20%	{transform: scale(0.6,1.4)}
+		30%	{transform: scale(1.3,0.7)}
+		40%	{transform: scale(0.7,1.3)}
+		50%	{transform: scale(1.2,0.8)}
+		60%	{transform: scale(0.8,1.2)}
+		70%	{transform: scale(1.1,0.9)}
+		80%	{transform: scale(0.9,1.1)}
+		90%	{transform: scale(1.1,0.9)}
+		100%	{transform: scale(1,1)}
+		}
+		#btn:hover {
+			animation: box 1s;
+			background: lightblue;
+			
+		}
+</pre>
+
+<h2>立方体实例:</h2>
+<pre>
+		* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#box {
+				height: 400px;
+				width: 400px;
+				position: relative;
+				transform-style:preserve-3d;
+				animation: box 5s linear infinite;
+				
+			}
+			
+			#top,
+			#back,
+			#front,
+			#bottom,
+			#left,
+			#right {
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -100px 0 0 -100px;
+				line-height: 200px;
+				text-align: center;
+				font-size: 48px;
+				color: white;
+				
+			}
+			
+			#top {
+				background: gold;
+				transform: rotatex(90deg) translatez(100px);
+			}
+			
+			#bottom {
+				background: blue;
+				transform: rotatex(90deg) translatez(-100px);
+			}
+			#front{
+				background: red;
+				transform: translatez(100px);
+			}
+			#back{
+				background: gray;
+				transform: translatez(-100px);
+			}
+			#left{
+				background: greenyellow;
+				transform:rotatey(90deg) translatez(-100px);
+			}
+			#right{
+				background: palegreen;
+				transform:rotatey(90deg) translatez(100px);
+			}
+			@keyframes box{
+				from{transform: rotatex(0deg)  rotatey(0deg) rotateZ(0deg)}
+				to{transform: rotatex(360deg)  rotatey(360deg) rotateZ(360deg)}
+			}
+</pre>
+	</body>
+</html>
